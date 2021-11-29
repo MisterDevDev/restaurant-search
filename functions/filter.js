@@ -23,10 +23,15 @@ const filterData = async (criteria) => {
             });
             break;
           case "cuisine":
+            if (Object.is(criteria[param] * 1, NaN)) {
+              error = "Cuisine parameter not valid";
+              break;
+            }
             data = data.filter((restaurant) => {
-              return restaurant[viableParameters.indexOf(param)]
-                .toLowerCase()
-                .includes(`${criteria[param].toLowerCase()}`);
+              return (
+                restaurant[viableParameters.indexOf(param)] * 1 ===
+                criteria[param] * 1
+              );
             });
             break;
           case "rating":
